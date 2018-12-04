@@ -38,19 +38,18 @@ def part1(iterable):
 def part2(iterable):
     # all_rect_dict = {s.split()[0]: rectangle(s) for s in iterable}
     all_rect_list = [rectangle(s) for s in iterable]
-    for rect in all_rect_list:
-        rcopy = all_rect_list[:]
-        rcopy = rcopy.remove(rect)
+    for claim, rect in enumerate(all_rect_list):
+        rcopy = all_rect_list.copy()
+        rcopy.remove(rect)
         if rect.collidelist(rcopy) == -1:
-            return rect
+            return claim + 1
 
 
 if __name__ == "__main__":
     assert part1(test_data) == 4
-    # assert part2(test_data) == 3
-    print(part2(test_data))
+    assert part2(test_data) == 3
 
     with open("day03_input.txt") as file:
         list_of_lines = [line.strip() for line in file.readlines()]
-        # print(part1(list_of_lines))  # 115242 not 47814390
-        # print(part2(list_of_lines))
+        print(part1(list_of_lines))  # 115242 not 47814390
+        print(part2(list_of_lines))  # 1046
