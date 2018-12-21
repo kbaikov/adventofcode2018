@@ -5,6 +5,7 @@ import difflib
 import logging as log
 
 import pygame
+import pytest
 
 LOGLEVEL = os.environ.get("LOGLEVEL", "INFO").upper()
 log.basicConfig(level=LOGLEVEL)
@@ -45,9 +46,17 @@ def part2(iterable):
             return claim + 1
 
 
+@pytest.mark.parametrize("input, result", [(test_data, 4)])
+def test_part1(input, result):
+    assert part1(input) == result
+
+
+@pytest.mark.parametrize("input, result", [(test_data, 3)])
+def test_part2(input, result):
+    assert part2(input) == result
+
+
 if __name__ == "__main__":
-    assert part1(test_data) == 4
-    assert part2(test_data) == 3
 
     with open("day03_input.txt") as file:
         list_of_lines = [line.strip() for line in file.readlines()]

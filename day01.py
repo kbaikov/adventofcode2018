@@ -2,6 +2,8 @@ import os
 from itertools import cycle
 import logging as log
 
+import pytest
+
 LOGLEVEL = os.environ.get("LOGLEVEL", "DEBUG").upper()
 log.basicConfig(level=LOGLEVEL)
 
@@ -22,17 +24,28 @@ def part2(iterable):
             seen.append(s)
 
 
+@pytest.mark.parametrize(
+    "input, result",
+    [([+1, -2, +3, +1], 3), ([+1, +1, +1], 3), ([+1, +1, -2], 0), ([-1, -2, -3], -6)],
+)
+def test_part1(input, result):
+    assert part1(input) == result
+
+
+@pytest.mark.parametrize(
+    "input, result",
+    [
+        ([+1, -1], 0),
+        ([+3, +3, +4, -2, -4], 10),
+        ([-6, +3, +8, +5, -6], 5),
+        ([+7, +7, -2, -7, -4], 14),
+    ],
+)
+def test_part2(input, result):
+    assert part2(input) == result
+
+
 if __name__ == "__main__":
-
-    assert part1([+1, -2, +3, +1]) == 3
-    assert part1([+1, +1, +1]) == 3
-    assert part1([+1, +1, -2]) == 0
-    assert part1([-1, -2, -3]) == -6
-
-    assert part2([+1, -1]) == 0
-    assert part2([+3, +3, +4, -2, -4]) == 10
-    assert part2([-6, +3, +8, +5, -6]) == 5
-    assert part2([+7, +7, -2, -7, -4]) == 14
 
     with open("day01_input.txt") as file:
         list_of_ints = [int(x) for x in file.readlines()]

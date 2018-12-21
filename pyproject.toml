@@ -9,6 +9,7 @@ python = "^3.6"
 rope = "^0.11.0"
 pygame = "^1.9"
 numpy = "^1.15"
+pytest = "^4.0"
 
 [tool.poetry.dev-dependencies]
 black = "18.9b0"
