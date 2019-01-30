@@ -9,6 +9,10 @@ log.basicConfig(level=LOGLEVEL)
 
 
 def part1(iterable):
+    """Return sum of the iterable
+    >>> part1([1, 2, 3])
+    6
+    """
     return sum(iterable)
 
 
